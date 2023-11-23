@@ -6,15 +6,21 @@
         Please enter your details, to log into your account
       </p>
 
-      <form class="form-group">
+      <form class="form-group" @submit.prevent="onSubmit">
         <div class="form-control mb-4">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" />
+          <input
+            v-model="enteredValue.email"
+            type="email"
+            class="form-control"
+            id="email"
+          />
         </div>
         <div class="form-control relactive">
           <label for="password">Password</label>
           <div class="password-group">
             <input
+              v-model="enteredValue.password"
               type="password"
               class="form-control"
               id="password"
@@ -51,6 +57,7 @@
           block
           rounded="xs"
           size="large"
+          type="submit"
           >Login</v-btn
         >
         <v-btn
@@ -133,6 +140,10 @@
 export default {
   data() {
     return {
+      enteredValue: {
+        email: '',
+        password: '',
+      },
       passwordShow: false,
       iconPassword: 'fa-solid fa-eye',
     };
@@ -144,6 +155,9 @@ export default {
         ? 'fa-solid fa-eye-slash'
         : 'fa-solid fa-eye';
       this.$refs.passwordInput.type = this.passwordShow ? 'text' : 'password';
+    },
+    onSubmit() {
+      console.log(this.enteredValue.email, this.enteredValue.password);
     },
   },
 };
